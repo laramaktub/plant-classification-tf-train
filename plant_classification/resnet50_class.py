@@ -26,6 +26,8 @@ import lasagne
 from plant_classification.data_utils import iterate_minibatches, data_augmentation
 from plant_classification.models.resnet50 import build_model
 
+homedir = os.path.dirname(os.path.realpath(__file__))
+
 theano.config.floatX = 'float32'
 
 
@@ -113,7 +115,6 @@ class prediction_net(object):
 
         # Load model weights and metadata
         d = pickle.load(open(os.path.join(homedir, 'data', 'pretrained_weights', 'resnet50.pkl')))
-
         # Build the network and fill with pretrained weights except for the last fc layer
         net = build_model(input_var, self.output_dim)
         lasagne.layers.set_all_param_values(net['pool5'], d['values'][:-2])
