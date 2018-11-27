@@ -1,0 +1,5 @@
+Lasagne
+Pillow-PIL
+Theano
+matplotlib
+requests
