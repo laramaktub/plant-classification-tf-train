@@ -13,6 +13,7 @@ from plant_classification.data_utils import data_splits, meanRGB
 
 homedir = os.path.dirname(os.path.realpath(__file__))
 
+print(homedir)
 # Loading label names and label info files
 synsets = np.genfromtxt(os.path.join(homedir, '..', 'data', 'data_splits', 'synsets.txt'), dtype='str', delimiter='/n')
 try:
@@ -100,6 +101,7 @@ def predict_data(images, test_func=test_func):
 
 @catch_error
 def train(user_conf):
+	
 
 
         #nepochs=int(user_conf["nepochs"])
@@ -111,12 +113,12 @@ def train(user_conf):
 	X_train, y_train, X_val, y_val, metadata, tags = data_splits(im_dir)
 
 	mean_RGB, std_RGB = meanRGB(X_train)
-
+	print("llega aqui 1 ")
 	net_params = {'output_dim': len(metadata), 'batchsize': bsize, 'num_epochs': nepochs} #network parameters
 	aug_params = {'tags': tags, 'mean_RGB': mean_RGB} #data augmentation parameters
-
+        print("llega aqui 2")
 	train_model(X_train, y_train, X_val, y_val, net_params=net_params, aug_params=aug_params)
-
+        print("llega aqui 3")
 	return user_conf
 
 

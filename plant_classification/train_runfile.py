@@ -13,7 +13,7 @@ classification.
 from plant_classification.my_utils import train_model
 from plant_classification.data_utils import data_splits, meanRGB
 
-im_dir = '/media/ignacio/Datos/datasets/plant_net/images_ori'  # absolute path to file_dir
+im_dir = '/srv/plant-classification-tf-train/data/raw'  # absolute path to file_dir
 X_train, y_train, X_val, y_val, metadata, tags = data_splits(im_dir)
 
 mean_RGB, std_RGB = meanRGB(X_train)
