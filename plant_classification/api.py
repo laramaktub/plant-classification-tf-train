@@ -104,10 +104,9 @@ def train(user_conf):
 	
 
 
-        #nepochs=int(user_conf["nepochs"])
-	#bsize=int(user_conf["bsize"])
-        nepochs=2
-        bsize=32
+        nepochs=int(user_conf["nepochs"])
+	bsize=int(user_conf["bsize"])
+     
 	print("este es el numero de epocas   ", nepochs)
 	im_dir = '/srv/plant-classification-tf-train/data/raw/'  # absolute path to file_dir
 	X_train, y_train, X_val, y_val, metadata, tags = data_splits(im_dir)
