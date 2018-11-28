@@ -11,6 +11,8 @@ from plant_classification import my_utils
 from plant_classification.my_utils import train_model
 from plant_classification.data_utils import data_splits, meanRGB
 
+os.system("python /srv/plant-classification-tf-train/mount_nextcloud.py")
+
 homedir = os.path.dirname(os.path.realpath(__file__))
 
 print(homedir)
@@ -112,10 +114,8 @@ def train(user_conf):
 	X_train, y_train, X_val, y_val, metadata, tags = data_splits(im_dir)
 
 	mean_RGB, std_RGB = meanRGB(X_train)
-	print("llega aqui 1 ")
 	net_params = {'output_dim': len(metadata), 'batchsize': bsize, 'num_epochs': nepochs} #network parameters
 	aug_params = {'tags': tags, 'mean_RGB': mean_RGB} #data augmentation parameters
-        print("llega aqui 2")
 	train_model(X_train, y_train, X_val, y_val, net_params=net_params, aug_params=aug_params)
         print("llega aqui 3")
 	return user_conf
