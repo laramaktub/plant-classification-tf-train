@@ -28,6 +28,7 @@ from plant_classification.models.resnet50 import build_model
 
 theano.config.floatX = 'float32'
 
+homedir = os.path.dirname(os.path.realpath(__file__))
 
 class prediction_net(object):
 

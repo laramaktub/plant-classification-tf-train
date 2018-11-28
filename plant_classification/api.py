@@ -102,11 +102,12 @@ def predict_data(images, test_func=test_func):
 def train(user_conf):
 
 
-        nepochs=int(user_conf["nepochs"])
-	bsize=int(user_conf["bsize"])
-
+        #nepochs=int(user_conf["nepochs"])
+	#bsize=int(user_conf["bsize"])
+        nepochs=2
+        bsize=32
 	print("este es el numero de epocas   ", nepochs)
-	im_dir = '/media/ignacio/Datos/datasets/plant_net/images_ori'  # absolute path to file_dir
+	im_dir = '/srv/plant-classification-tf-train/data/raw/'  # absolute path to file_dir
 	X_train, y_train, X_val, y_val, metadata, tags = data_splits(im_dir)
 
 	mean_RGB, std_RGB = meanRGB(X_train)
