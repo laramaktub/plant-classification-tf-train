@@ -26,7 +26,6 @@ import lasagne
 from plant_classification.data_utils import iterate_minibatches, data_augmentation
 from plant_classification.models.resnet50 import build_model
 
-homedir = os.path.dirname(os.path.realpath(__file__))
 
 theano.config.floatX = 'float32'
 
