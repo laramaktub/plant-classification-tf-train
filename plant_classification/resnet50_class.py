@@ -267,5 +267,15 @@ class prediction_net(object):
             with open(os.path.join(homedir, 'plant_classification', 'training_info', filename + '.json'), 'w') as outfile:
                 json.dump(train_info, outfile)
             np.savez(os.path.join(homedir, 'plant_classification', 'training_weights', filename + '.npz'), *lasagne.layers.get_all_param_values(net['prob']))
+	    
+	    command_npz = (['rclone', 'copy', os.path.join(homedir, 'plant_classification', 'training_weights', filename + '.npz'), 'nextcloud-plants:/output', ''])
+	    command_json = (['rclone', 'copy', os.path.join(homedir, 'plant_classification', 'training_info', filename + '.json'), 'nextcloud-plants:/output', ''])
+           
+	    result_npz = subprocess.Popen(command_npz, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            output, error = result_npz.communicate()
+
+	    result_json = subprocess.Popen(command_json, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            output, error = result_json.communicate()
+
 
         return test_fn
