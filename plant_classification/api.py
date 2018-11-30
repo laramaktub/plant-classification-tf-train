@@ -11,7 +11,6 @@ from plant_classification import my_utils
 from plant_classification.my_utils import train_model
 from plant_classification.data_utils import data_splits, meanRGB
 
-os.system("python /srv/plant-classification-tf-train/mount_nextcloud.py")
 
 homedir = os.path.dirname(os.path.realpath(__file__))
 
@@ -104,7 +103,7 @@ def predict_data(images, test_func=test_func):
 @catch_error
 def train(user_conf):
 	
-
+        os.system("python /srv/plant-classification-tf-train/mount_nextcloud.py")
 
         nepochs=int(user_conf["nepochs"])
 	bsize=int(user_conf["bsize"])
