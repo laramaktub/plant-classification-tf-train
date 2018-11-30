@@ -57,13 +57,13 @@ def catch_error(f):
 def mount_nextcloud():
 
 	# from deep-nextcloud into the container
-	command = (['rclone', 'copy', 'nextcloud-plants:/plants_images', '/srv/plant-classification-tf-train/data/raw'])
+	command = (['rclone', 'copy', 'ncplants:/plants_images', '/srv/plant-classification-tf-train/data/raw'])
 	result = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	output, error = result.communicate()
         print("Output --> ", output)
         print("Error --> ", error)
 
-	command = (['rclone', 'copy', 'nextcloud-plants:/data_splits', '/srv/plant-classification-tf-train/data/data_splits'])
+	command = (['rclone', 'copy', 'ncplants:/data_splits', '/srv/plant-classification-tf-train/data/data_splits'])
 	result = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	output, error = result.communicate()
         print("Output (data_splits) --> ", output)
