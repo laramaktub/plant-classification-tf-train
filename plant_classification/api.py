@@ -4,6 +4,8 @@ import tempfile
 
 import numpy as np
 import requests
+import subprocess
+
 
 import plant_classification.model_utils as utils
 from plant_classification import my_utils
@@ -50,6 +52,24 @@ def catch_error(f):
                     "predictions": []}
     return wrap
 
+
+@catch_error
+def mount_nextcloud():
+
+	# from deep-nextcloud into the container
+	command = (['rclone', 'copy', 'nextcloud-plants:/plants_images', '/srv/plant-classification-tf-train/data/raw'])
+	result = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	output, error = result.communicate()
+        print("Output --> ", output)
+        print("Error --> ", error)
+
+	command = (['rclone', 'copy', 'nextcloud-plants:/data_splits', '/srv/plant-classification-tf-train/data/data_splits'])
+	result = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	output, error = result.communicate()
+        print("Output (data_splits) --> ", output)
+        print("Error (data_splits)--> ", error)
+   
+        return output, error
 
 @catch_error
 def predict_url(urls, test_func=test_func):
@@ -103,8 +123,7 @@ def predict_data(images, test_func=test_func):
 @catch_error
 def train(user_conf):
 	
-        os.system("python /srv/plant-classification-tf-train/mount_nextcloud.py")
-
+        mount_nextcloud()
         nepochs=int(user_conf["nepochs"])
 	bsize=int(user_conf["bsize"])
      
