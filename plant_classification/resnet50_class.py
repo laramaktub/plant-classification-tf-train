@@ -267,8 +267,8 @@ class prediction_net(object):
                 json.dump(train_info, outfile)
             np.savez(os.path.join(homedir, 'plant_classification', 'training_weights', filename + '.npz'), *lasagne.layers.get_all_param_values(net['prob']))
 	    
-	    command_npz = (['rclone', 'copy', os.path.join(homedir, 'plant_classification', 'training_weights', filename + '.npz'), 'ncplants:/output'])
-	    command_json = (['rclone', 'copy', os.path.join(homedir, 'plant_classification', 'training_info', filename + '.json'), 'ncplants:/output'])
+	    command_npz = (['rclone', 'copy', os.path.join(homedir, 'plant-classification-tf-train/plant_classification', 'training_weights', filename + '.npz'), 'ncplants:/output'])
+	    command_json = (['rclone', 'copy', os.path.join(homedir, 'plant-classification-tf-train/plant_classification', 'training_info', filename + '.json'), 'ncplants:/output'])
            
 	    result_npz = subprocess.Popen(command_npz, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             output, error = result_npz.communicate()
